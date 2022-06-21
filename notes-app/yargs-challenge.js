@@ -1,5 +1,8 @@
 //Yargs helps you build interactive command line tools, by parsing arguments and generating an elegant user interface.
+// Para rodar esse arquivo: node yargs-challenge.js add --title="t" --body="b"
 const yargs = require('yargs');
+
+const { addNote } = require('./notes');
 
 yargs.command({
   command: 'add',
@@ -17,8 +20,7 @@ yargs.command({
     },
   },
   handler: function(argv) {
-    console.log('Title:', argv.title);
-    console.log('Body:', argv.body);
+    addNote(argv.title, argv.body);
   }
 });
 
