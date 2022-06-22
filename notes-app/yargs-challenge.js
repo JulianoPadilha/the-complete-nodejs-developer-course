@@ -2,7 +2,7 @@
 // Para rodar esse arquivo: node yargs-challenge.js add --title="t" --body="b"
 const yargs = require('yargs');
 
-const { addNote, removeNote } = require('./notes');
+const { addNote, removeNote, listNotes } = require('./notes');
 
 yargs.command({
   command: 'add',
@@ -51,7 +51,7 @@ yargs.command({
   command: 'list',
   describe: 'List your notes!',
   handler() {
-    console.log('Listing out all notes!');
+    listNotes();
   }
 });
 

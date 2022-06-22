@@ -25,12 +25,28 @@ const removeNote = (title) => {
     console.log(chalk.bold.white.bgGreen('Note removed!'));
   }
 }
+  
+/**
+ * JSDoc
+ * @function listNotes
+ * @returns {{ title: string, body: string }[]}
+ */
+const listNotes = () => {
+  console.log(chalk.bold.white.bgYellow('Your notes!'));
+  const notes = loadNotes();
+  return notes.map(note => console.log(note.title));
+}
 
 const saveNotes = (notes) => {
   const dataJSON = JSON.stringify(notes);
   fs.writeFileSync('notes.json', dataJSON);
 }
 
+/**
+ * JSDoc
+ * @function loadNotes
+ * @returns {{ title: string, body: string }[]}
+ */
 const loadNotes = () => {
   try {
     const dataBuffer = fs.readFileSync('notes.json');
@@ -45,4 +61,5 @@ module.exports = {
   getNotes,
   addNote,
   removeNote,
+  listNotes,
 };
