@@ -27,10 +27,11 @@ const removeNote = (title) => {
 const readNote = (title) => {
   const notes = loadNotes();
   const note = findNote(notes, title);
+  debugger;
   if (note) {
     console.log(chalk.bold.white.bgBlue(`Title: ${note.title}`), `Body: ${note.body}`);
   } else {
-    console.log(chalk.bold.white.bgRed('No not found!'));
+    console.log(chalk.bold.white.bgRed('No note found!'));
   }
 }
   
