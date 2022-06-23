@@ -2,7 +2,7 @@
 // Para rodar esse arquivo: node yargs-challenge.js add --title="t" --body="b"
 const yargs = require('yargs');
 
-const { addNote, removeNote, listNotes } = require('./notes');
+const { addNote, removeNote, listNotes, readNote } = require('./notes');
 
 yargs.command({
   command: 'add',
@@ -42,8 +42,15 @@ yargs.command({
 yargs.command({
   command: 'read',
   describe: 'Read a note!',
-  handler() {
-    console.log('Reading the note');
+  builder: {
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    readNote(argv.title);
   }
 });
 
