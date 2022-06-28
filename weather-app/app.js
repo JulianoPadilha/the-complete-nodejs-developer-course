@@ -6,14 +6,26 @@ const geocodeURL = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Ange
 const weatherUrl = 'http://api.weatherstack.com/current?access_key=6200ec9ce5a600351af24de5cbe75093&query=37.8267,-122.4233';
 
 request({ url: weatherUrl, json: true }, (error, response) => {
-  const { current } = response.body;
-  const { temperature, feelslike, weather_descriptions } = current;
-  console.log(`${weather_descriptions[0]}. It is currently ${temperature} degrees out. It feels like ${feelslike} degrees out.`);
+  if (error) {
+    console.log('Unable to connect to weather service!');
+  } else if (response.body.error) {
+    console.log('Unable to find location!');
+  } else {
+    const { current } = response.body;
+    const { temperature, feelslike, weather_descriptions } = current;
+    console.log(`${weather_descriptions[0]}. It is currently ${temperature} degrees out. It feels like ${feelslike} degrees out.`);
+  }
 });
 
 request({ url: geocodeURL, json: true }, (error, response) => {
   const { features } = response.body;
-  const { center } = features[0];
-  const [longitude, latitude] = center;
-  console.log(`${latitude}, ${longitude}`);
+  if (error) {
+    console.log('Unable to connect to weather service!');
+  } else if (!features.length) {
+    console.log('Unable to find location. Try another search.');
+  } else {
+    const { center } = features[0];
+    const [longitude, latitude] = center;
+    console.log(`${latitude}, ${longitude}`);
+  }
 });
