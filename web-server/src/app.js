@@ -36,11 +36,24 @@ app.get('/help', (req, res) => {
     name: 'Juliano Padilha',
   });
 });
-
 app.get('/weather', (req, res) => {
   res.send({
     forecast: 'It is snowing!',
     location: 'New York'
+  });
+});
+app.get('/help/*', (req, res) => {
+  res.render('404', {
+    errorMessage: 'Help article not found.',
+    title: 'Help',
+    name: 'Juliano Padilha',
+  });
+});
+app.get('*', (req, res) => {
+  res.render('404', {
+    errorMessage: 'Page not found.',
+    title: '404',
+    name: 'Juliano Padilha'
   });
 });
 
