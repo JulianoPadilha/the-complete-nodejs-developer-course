@@ -2,6 +2,9 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
+
 const app = express();
 
 // Define paths for Express config
@@ -23,12 +26,14 @@ app.get('', (req, res) => {
     name: 'Juliano Padilha',
   });
 });
+
 app.get('/about', (req, res) => {
   res.render('about', {
     title: 'About me',
     name: 'Juliano Padilha',
   });
 });
+
 app.get('/help', (req, res) => {
   res.render('help', {
     helpText: 'This is the help page!',
@@ -43,12 +48,23 @@ app.get('/weather', (req, res) => {
       error: 'You must provide a valid address.'
     });
   }
-  res.send({
-    forecast: 'It is snowing!',
-    location: 'New York',
-    address,
+  geocode(address, (error, geocodeData) => {
+    if (error) {
+      return res.send({ error });
+    }
+    forecast(geocodeData.latitude, geocodeData.longitude, (error, forecastData) => {
+      if (error) {
+        return res.send({ error });
+      }
+      res.send({
+        forecast: forecastData,
+        location: geocodeData.location,
+        address,
+      });
+    });
   });
 });
+
 app.get('/products', (req, res) => {
   if (!req.query.search) {
     return res.send({
@@ -59,6 +75,7 @@ app.get('/products', (req, res) => {
     products: [],
   });
 });
+
 app.get('/help/*', (req, res) => {
   res.render('404', {
     errorMessage: 'Help article not found.',
@@ -66,6 +83,7 @@ app.get('/help/*', (req, res) => {
     name: 'Juliano Padilha',
   });
 });
+
 app.get('*', (req, res) => {
   res.render('404', {
     errorMessage: 'Page not found.',
