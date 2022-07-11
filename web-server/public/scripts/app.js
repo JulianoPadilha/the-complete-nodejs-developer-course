@@ -1,7 +1,13 @@
-function fetchData() {
-  fetch('http://localhost:3000/weather?address=sao paulo')
+const input = document.querySelector('input');
+const button = document.querySelector('button');
+
+function fetchWeatherData(location) {
+  fetch(`http://localhost:3000/weather?address=${location}`)
     .then(response => response.json())
-    .then(data => console.log(data));
+    .then(data => data);
 }
 
-fetchData();
+function onClickSearchButton() {
+  const location = input.value;
+  button.addEventListener('click', fetchWeatherData(location));
+}
