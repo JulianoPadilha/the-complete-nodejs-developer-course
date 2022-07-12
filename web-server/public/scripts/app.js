@@ -1,13 +1,23 @@
 const input = document.querySelector('input');
-const button = document.querySelector('button');
+const form = document.querySelector('form');
+const searchResultMessage = document.querySelector('#search-result-message');
 
-function fetchWeatherData(location) {
+function renderFetchedData(data) {
+  if (data.error) {
+    return searchResultMessage.textContent = data.error;
+  }
+  return searchResultMessage.textContent = `${data.location} - ${data.forecast}`;
+}
+
+function fetchWeatherData() {
+  const location = input.value;
+  searchResultMessage.textContent = 'Loading...';
   fetch(`http://localhost:3000/weather?address=${location}`)
     .then(response => response.json())
-    .then(data => data);
+    .then(data => renderFetchedData(data));
 }
 
-function onClickSearchButton() {
-  const location = input.value;
-  button.addEventListener('click', fetchWeatherData(location));
-}
+form.addEventListener('submit', (event) => { 
+  event.preventDefault();
+  fetchWeatherData();
+});
