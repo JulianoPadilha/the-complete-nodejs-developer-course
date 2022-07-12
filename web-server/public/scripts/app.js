@@ -12,7 +12,7 @@ function renderFetchedData(data) {
 function fetchWeatherData() {
   const location = input.value;
   searchResultMessage.textContent = 'Loading...';
-  fetch(`http://localhost:3000/weather?address=${location}`)
+  fetch(`/weather?address=${location}`)
     .then(response => response.json())
     .then(data => renderFetchedData(data));
 }
