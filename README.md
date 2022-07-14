@@ -16,3 +16,10 @@ https://padilha-weather-app.herokuapp.com/
 O PROJECT_PATH do heroku está configurado da seguinte forma:
 `heroku config:set PROJECT_PATH=web-server`
 Ou seja, o que estiver na pasta web-server vai ser deployado.
+
+### MongoDB
+Comando para iniciar o Mongo localmente no Mac após baixar o Mongo no site e criar a pasta mongodb-data.
+`/Users/julianopadilha/mongodb/bin/mongod --dbpath=/Users/julianopadilha/mongodb-data`
+
+Instalar o Studio 3T para gerenciar visualmente as bancos no Mongo
+https://robomongo.org/
