@@ -3,69 +3,41 @@ const { MongoClient, ObjectId } = require('mongodb');
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'task-manager';
 
-/* 
-https://www.mongodb.com/docs/manual/reference/method/ObjectId/
-Returns a new ObjectId. The 12-byte ObjectId consists of:
-
-- A 4-byte timestamp, representing the ObjectId's creation, measured in seconds since the Unix epoch.
-- A 5-byte random value generated once per process. This random value is unique to the machine and process.
-- A 3-byte incrementing counter, initialized to a random value.
-*/
-// const id = new ObjectId();
-// console.log(id);
-// console.log(id.getTimestamp());
-
 MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) => {
   if (error) {
     return console.log('Unable to connect to database!');
   }
   const db = client.db(databaseName);
-  // db.collection('users').insertOne({
-  //   name: 'Juliano',
-  //   age: 29,
-  // }, (error, result) => {
-  //   if (error) {
-  //     return console.log('Unable to insert user');
-  //   }
 
-  //   console.log(result);
+  // findOne
+  // db.collection('users').findOne({ _id: new ObjectId('62d52e0d36f17bef6c1a38a7') }, (error, user) => {
+  //   if (error) {
+  //     return console.log('Unable to fetch!');
+  //   }
+  //   console.log(user);
   // });
 
-  // db.collection('users').insertMany([
-  //   {
-  //     name: 'Juliano',
-  //     age: 29
-  //   },
-  //   {
-  //     name: 'Carol',
-  //     age: 33
-  //   }
-  // ], (error, result) => {
+  // find
+  // db.collection('users').find({ age: 29 }).toArray((error, users) => {
   //   if (error) {
-  //     return console.log('Unable to insert users!');
+  //     return console.log('Unable to fetch!');
   //   }
-
-  //   console.log(result.insertedIds);
+  //   console.log(users);
   // });
 
-  // db.collection('tasks').insertMany([
-  //   {
-  //     description: 'Task 1',
-  //     completed: true
-  //   },
-  //   {
-  //     description: 'Task 2',
-  //     completed: true
-  //   },
-  //   {
-  //     description: 'Task 3',
-  //     completed: false
-  //   }
-  // ], (error, result) => {
-  //   if (error) {
-  //     return console.log('Unable to insert tasks!');
-  //   }
-
-  //   console.log(result.insertedIds);
-  // });
+  // Challenge //
+  //1. Use findOne to fetch the last task by id
+  db.collection('tasks').findOne({ _id: new ObjectId('62d52ece686a009d5c744c64') }, (error, task) => {
+    if (error) {
+      return console.log('Unable to fetch!');
+    }
+    console.log(task);
+  });
+  //2. Usefind to fetch all tasks that are not completed
+  db.collection('tasks').find({ completed: false }).toArray((error, tasks) => {
+    if (error) {
+      return console.log('Unable to fetch!');
+    }
+    console.log(tasks);
+  });
 });
