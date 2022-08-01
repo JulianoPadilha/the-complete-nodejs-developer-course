@@ -9,35 +9,27 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) =>
   }
   const db = client.db(databaseName);
 
-  // findOne
-  // db.collection('users').findOne({ _id: new ObjectId('62d52e0d36f17bef6c1a38a7') }, (error, user) => {
-  //   if (error) {
-  //     return console.log('Unable to fetch!');
-  //   }
-  //   console.log(user);
-  // });
+  // db.collection('users').updateOne({ _id: new ObjectId('62d52add6504e87a76477caa') }, {
+  //   $set: {
+  //     name: 'Padilha',
+  //   },
+  //   $inc: {
+  //     age: 1
+  //   },
+  // }).then((result) => {
+  //   console.log(result);
+  // }).catch((error) => {
+  //   console.log(error);
+  // }); 
 
-  // find
-  // db.collection('users').find({ age: 29 }).toArray((error, users) => {
-  //   if (error) {
-  //     return console.log('Unable to fetch!');
-  //   }
-  //   console.log(users);
-  // });
-
-  // Challenge //
-  //1. Use findOne to fetch the last task by id
-  db.collection('tasks').findOne({ _id: new ObjectId('62d52ece686a009d5c744c64') }, (error, task) => {
-    if (error) {
-      return console.log('Unable to fetch!');
-    }
-    console.log(task);
-  });
-  //2. Usefind to fetch all tasks that are not completed
-  db.collection('tasks').find({ completed: false }).toArray((error, tasks) => {
-    if (error) {
-      return console.log('Unable to fetch!');
-    }
-    console.log(tasks);
-  });
+  // ===Challenge=== //
+  db.collection('tasks').updateMany({ completed: false }, {
+    $set: {
+      completed: true,
+    },
+  }).then((result) => {
+    console.log(result);
+  }).catch((error) => {
+    console.log(error);
+  })
 });
