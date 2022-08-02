@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node mongodb.js"
+    "start-mongodb": "node mongodb.js",
+    "start-mongoose": "node src/db/mongoose.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^4.8.0"
+    "mongodb": "^4.8.0",
+    "mongoose": "^6.5.0"
   }
 }
