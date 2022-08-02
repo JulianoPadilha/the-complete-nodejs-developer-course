@@ -11,13 +11,34 @@ const User = mongoose.model('User', {
   },
 });
 
-const me = new User({
-  name: 'Juliano',
-  age: 29
+// const me = new User({
+//   name: 'Juliano',
+//   age: 29
+// });
+
+// me.save().then(() => {
+//   console.log(me);
+// }).catch((error) => {
+//   console.log(error);
+// });
+
+// === Challenge ===//
+const Task = mongoose.model('Task', {
+  description: {
+    type: String,
+  },
+  completed: {
+    type: Boolean,
+  },
 });
 
-me.save().then(() => {
-  console.log(me);
+const task = new Task({
+  description: 'Task 1',
+  completed: false,
+});
+
+task.save().then(() => {
+  console.log(task);
 }).catch((error) => {
   console.log(error);
 });
