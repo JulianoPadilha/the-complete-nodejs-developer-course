@@ -23,3 +23,6 @@ Comando para iniciar o Mongo localmente no Mac após baixar o Mongo no site e cr
 
 Instalar o Studio 3T para gerenciar visualmente as bancos no Mongo
 https://robomongo.org/
+
+### Postman Advanced
+Na aula 110 tem uma série de dicas de uso avançado do Postman, como criação de ambientes, variáveis, tests.
