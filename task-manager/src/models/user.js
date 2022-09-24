@@ -49,6 +49,29 @@ const userSchema = mongoose.Schema({
   }],
 });
 
+   
+// Se fossemos utilizar desta forma, teríamos que alterar a resposta das rotas para res.send({ user: user.getPublicProfile, token });
+// userSchema.methods.getPublicProfile = function() {
+//   const user = this;
+//   const userObject = user.toObject();
+
+//   delete userObject.password;
+//   delete userObject.tokens;
+
+//   return userObject;
+// }
+
+// É o mesmo da função acima, porém usando o método toJSON do mongoose que aplica a função de forma global em todas as instâncias de user
+userSchema.methods.toJSON = function() {
+  const user = this;
+  const userObject = user.toObject();
+
+  delete userObject.password;
+  delete userObject.tokens;
+
+  return userObject;
+}
+
 userSchema.methods.generateAuthToken = async function() {
   const user = this;
   const token = jwt.sign({ _id: user._id.toString() }, 'thisismysecret');
