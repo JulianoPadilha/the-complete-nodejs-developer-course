@@ -49,6 +49,13 @@ const userSchema = mongoose.Schema({
   }],
 });
 
+// Criação de uma relação entre o Model de User e Task para pegar todas as tasks de um usuário
+userSchema.virtual('tasks', {
+  ref: 'Task',
+  localField: '_id',
+  foreignField: 'owner'
+});
+
    
 // Se fossemos utilizar desta forma, teríamos que alterar a resposta das rotas para res.send({ user: user.getPublicProfile, token });
 // userSchema.methods.getPublicProfile = function() {
