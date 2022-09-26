@@ -48,6 +48,8 @@ const userSchema = mongoose.Schema({
       required: true,
     }
   }],
+}, {
+  timestamps: true,
 });
 
 // Criação de uma relação entre o Model de User e Task para pegar todas as tasks de um usuário
