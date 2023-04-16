@@ -26,3 +26,106 @@ https://robomongo.org/
 
 ### Postman
 Na aula 110 tem uma série de dicas de uso avançado do Postman, como criação de ambientes, variáveis, tests.
+
+### Endpoints
+
+> Users
+
+**Create user** 
+```
+POST - /users
+
+Body
+{
+	"name": "Juliano",
+	"email": "juliano@mail.com",
+	"password": "1234567" 
+}
+```
+
+**Login user** 
+```
+POST - /users/login
+
+Body
+{
+  "email": "juliano@mail.com",
+  "password": "1234567"
+}
+```
+
+**Logout user session** 
+```
+POST - /users/logout
+```
+
+**Logout all user sessions** 
+```
+POST - /users/logout/all
+```
+
+**Get authenticated user** 
+```
+GET - /users/me
+```
+
+**Get user by id** 
+```
+GET - /users/{ID}
+```
+
+**Update authenticated user** 
+```
+PATCH - /users/me
+
+Body
+{
+  "name": "Juliano Padilha"
+}
+```
+
+**Delete authenticated user** 
+```
+DELETE - /users/me
+```
+
+> Tasks
+
+**Create task** 
+```
+POST - /tasks
+
+Body
+{
+  "description": "Description...",
+  "completed": false
+}
+```
+
+**Get tasks from authenticated user** 
+```
+GET - /tasks
+
+Params
+sortBy = createdAt:asc | desc
+```
+
+**Get task by id** 
+```
+GET - /tasks/{ID}
+```
+
+**Update task by id** 
+```
+PATCH - /tasks/{ID}
+
+Body 
+{
+  "completed": true
+}
+```
+
+**Delete task by id** 
+```
+DELETE - /tasks/{ID}
+```
